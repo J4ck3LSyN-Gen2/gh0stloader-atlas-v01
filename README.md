@@ -1,4 +1,4 @@
-# gh0stLoader v0.2
+# gh0stLoader v0.1
 
 Windows/x64 implant generator and build from a single Python orchestrator.
 
@@ -383,3 +383,5 @@ Version history:
 - **v0.2** (current): per-arity 5/6/11-arg stubs, Halo's-Gate resolver (B8 + 8B05
   wrapped), working `shellcode:` injector, forward-secret ECDH mesh, j00ru-derived
   SSN plausible ranges.
+
+  *Generatead by A.T.L.A.S (Advanced, Trasmit, Logic, Analysis, System)*
