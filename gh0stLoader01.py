@@ -41,7 +41,7 @@ from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
 # --------------------------------------------------------------------------
 # Authoritative SSN ranges extracted from the validated j00ru windows-syscalls
-# dataset (/root/globe/ctx/windows-syscalls/x64/json/nt-per-system.json).
+# dataset (/.../windows-syscalls/x64/json/nt-per-system.json).
 # Resolution is still done at RUNTIME by walking ntdll (SSNs drift per build,
 # e.g. NtCreateThreadEx = 194 on Win10 22H2 .. 201 on Win11 24H2/25H2), but
 # these ground-truth values let the implant self-check that a resolved SSN is
@@ -61,7 +61,7 @@ SSN_SANITY = {
     "NtCreateThreadEx":          (165, 201),  # 165=Vista .. 201=Win11 24H2/25H2
 }
 # Verified ground-truth spans (x64, all builds) from
-# /root/globe/ctx/windows-syscalls/x64/json/nt-per-system.json:
+# /.../windows-syscalls/x64/json/nt-per-system.json:
 #   NtQueryInformationProcess 22..25  NtAllocateVirtualMemory 21..24
 #   NtWriteVirtualMemory 55..58       NtProtectVirtualMemory 77..80
 #   NtWaitForSingleObject 1..4        NtCreateThreadEx 165..201
