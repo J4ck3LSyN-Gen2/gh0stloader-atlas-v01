@@ -384,4 +384,4 @@ Version history:
   wrapped), working `shellcode:` injector, forward-secret ECDH mesh, j00ru-derived
   SSN plausible ranges.
 
-  *Generatead by A.T.L.A.S (Advanced, Trasmit, Logic, Analysis, System)*
+  *Generatead by A.T.L.A.S (Advanced, Trasmit, Logic, Analysis, System), do NOT use any of this without proper modification (J4ck3LSyN)*
